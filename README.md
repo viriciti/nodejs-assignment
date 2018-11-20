@@ -1,6 +1,7 @@
 # ViriCiti Nodejs Assignment
 ![
 ](https://imgs.xkcd.com/comics/code_quality_3.png)
+
 This repository holds the ViriCiti Nodejs assignment. In this project you will find the description regarding the assignment for you to do. This assignment represent what we do on a day to day basis. We receive raw data from vehicles store it on database then send it to browser app via websocket.
 
 ## Getting Started
