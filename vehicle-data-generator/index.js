@@ -33,6 +33,12 @@ const readOutLoud = (vehicleName) => {
 	// And when to use one or the others
 	// =========================
 
+	//A1:  The way I understand it -
+	//fs.createReadStream reads files in small chunks and can improve speed of an application.
+	//fs.readFileSync  reads file in the same single thread loop. Can cause problems on webservers.
+	//fs.readFileAsync defers the process to another thread until ready for callback. 
+
+
 	// Now comes the interesting part,
 	// Handling this filestream requires us to create pipeline that will transform the raw string
 	// to object and sent out to nats
@@ -64,7 +70,7 @@ const readOutLoud = (vehicleName) => {
 
 					nats.publish(`vehicle.${vehicleName}`, obj, cb)
 
-				}, Math.ceil(Math.random() * 150))
+				}, Math.ceil(Math.random() * 1500))
 			}
 		})))
 	// =========================

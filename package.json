@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start-nats": "sh ./start-nats",
-    "start-broadcast": "node vehicle-data-generator/index.js"
+    "start-broadcast": "node vehicle-data-generator/index.js",
+    "start-mongo-push": "node mongo-push/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "csv-parse": "^3.2.0",
-    "nats": "^1.0.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.2.6",
+    "nats": "^1.0.1",
+    "socket.io": "^2.2.0"
   }
 }
