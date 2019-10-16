@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start-nats": "sh ./start-nats",
-    "start-broadcast": "node vehicle-data-generator/index.js"
+    "start-broadcast": "node vehicle-data-generator/index.js",
+    "start-mongodb": "mongod --dbpath mongo-db"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "csv-parse": "^3.2.0",
+    "mongoose": "^5.7.5",
     "nats": "^1.0.1"
   }
 }

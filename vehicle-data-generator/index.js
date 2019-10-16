@@ -57,7 +57,7 @@ const readOutLoud = (vehicleName) => {
 
 					i++
 					if((i % 100) === 0)
-						console.log(`vehicle ${vehicleName} sent have sent ${i} messages`)
+						console.log(`vehicle ${vehicleName} has sent ${i} messages`)
 
 					// The first parameter on this function is topics in which data will be broadcasted
 					// it also includes the vehicle name to seggregate data between different vehicle
