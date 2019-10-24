@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = new Router();
 const mongoose = require("mongoose");
-const ObjectID = require("mongodb").ObjectID;
+
 mongoose.connect("mongodb://localhost:27017/myproject", {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -69,6 +69,7 @@ router.patch("/:Id", getMessage, async (req, res) => {
       { _id: res.message._id },
       {
         $set: {
+          _id: newMsg._id,
           msg: {
             time: newMsg.msg.time,
             energy: newMsg.msg.energy,
@@ -78,10 +79,6 @@ router.patch("/:Id", getMessage, async (req, res) => {
             soc: newMsg.msg.soc
           }
         }
-      },
-      function(error, result) {
-        if (error) console.log("Error: ", error);
-        else console.log("Message updated.");
       }
     );
     res.json({ message: "Message updated successfully" });
@@ -97,11 +94,11 @@ router.post("/message", async (req, res, next) => {
     _id: parseInt(req.body.id),
     msg: {
       time: parseInt(req.body.time),
-      energy: parseInt(req.body.energy),
+      energy: parseFloat(req.body.energy),
       gps: req.body.gps,
-      odo: parseInt(req.body.odo),
+      odo: parseFloat(req.body.odo),
       speed: rparseInt(eq.body.speed),
-      soc: parseInt(req.body.soc)
+      soc: parseFloat(req.body.soc)
     }
   };
   try {
