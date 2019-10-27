@@ -26,7 +26,11 @@ router.get("/", async (req, res) => {
 
 //Getting message by id
 router.get("/id/:Id", getMessage, (req, res) => {
-  res.json(res.message);
+  try {
+    res.json(res.message);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 //Update message by id number
@@ -89,19 +93,40 @@ router.patch("/:Id", getMessage, async (req, res) => {
 
 //Posting new message
 router.post("/message", async (req, res, next) => {
-  //const newMsg = req.body;
   const newMsg = {
-    _id: parseInt(req.body.id),
+    _id: 0,
     msg: {
-      time: parseInt(req.body.time),
-      energy: parseFloat(req.body.energy),
-      gps: req.body.gps,
-      odo: parseFloat(req.body.odo),
-      speed: rparseInt(eq.body.speed),
-      soc: parseFloat(req.body.soc)
+      time: 0,
+      energy: 0,
+      gps: "",
+      odo: 0,
+      speed: 0,
+      soc: 0
     }
   };
   try {
+    if (req.body.id != null) {
+      newMsg._id = parseInt(req.body.id);
+    }
+    if (req.body.time != null) {
+      newMsg.msg.time = parseInt(req.body.time);
+    }
+    if (req.body.energy != null) {
+      newMsg.msg.energy = parseFloat(req.body.energy);
+    }
+    if (req.body.gps != null) {
+      newMsg.msg.gps = req.body.gps;
+    }
+    if (req.body.odo != null) {
+      newMsg.msg.odo = parseFloat(req.body.odo);
+    }
+    if (req.body.speed != null) {
+      newMsg.msg.speed = parseInt(req.body.speed);
+    }
+    if (req.body.soc != null) {
+      newMsg.msg.soc = parseFloat(req.body.soc);
+    }
+
     await VehicleData.insertOne(newMsg);
     res.json({ message: "Message added successfully" });
   } catch (err) {
@@ -112,9 +137,8 @@ router.post("/message", async (req, res, next) => {
 
 //Delete message by id
 router.delete("/id/:Id", async (req, res) => {
-  const msgId = parseInt(req.params.Id);
-
   try {
+    const msgId = parseInt(req.params.Id);
     await VehicleData.deleteOne({ _id: msgId });
     res.json({ message: "Deleted message with Id:" + req.params.Id });
   } catch (err) {
