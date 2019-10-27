@@ -6,15 +6,38 @@ const app = express();
 
 app.use(router);
 
-// app.get("/user", function(req, res) {
-//   res.status(200).json({ name: "john" });
-// });
+app.get("/", function(req, res) {
+  res.status(200).json({ name: "john" });
+});
 
 request(app)
   .get("/")
   .expect("Content-Type", /json/)
-  //.expect("Content-Length", "15")
-  .expect(200)
+  .expect(500)
+  .end(function(err, res) {
+    if (err) throw err;
+  });
+
+request(app)
+  .get("/id/:Id")
+  .expect("Content-Type", /json/)
+  .expect(404)
+  .end(function(err, res) {
+    if (err) throw err;
+  });
+
+request(app)
+  .patch("/:Id")
+  .expect("Content-Type", /json/)
+  .expect(404)
+  .end(function(err, res) {
+    if (err) throw err;
+  });
+
+request(app)
+  .post("/message")
+  .expect("Content-Type", /json/)
+  .expect(500)
   .end(function(err, res) {
     if (err) throw err;
   });
