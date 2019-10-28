@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
 });
 
 //Getting message by id
-router.get("/id/:Id", getMessage, (req, res) => {
+router.get("/message/:Id", getMessage, (req, res) => {
   try {
     res.json(res.message);
   } catch (err) {
@@ -34,41 +34,41 @@ router.get("/id/:Id", getMessage, (req, res) => {
 });
 
 //Update message by id number
-router.patch("/:Id", getMessage, async (req, res) => {
-  console.log("MESSAGE ID: " + res.message._id);
-  const newMsg = {
-    _id: res.message._id,
-    msg: {
-      time: res.message.msg.time,
-      energy: res.message.msg.energy,
-      gps: res.message.msg.gps,
-      odo: res.message.msg.odo,
-      speed: res.message.msg.speed,
-      soc: res.message.msg.soc
-    }
-  };
-  if (req.body.id != null) {
-    newMsg._id = parseInt(req.body.id);
-  }
-  if (req.body.time != null) {
-    newMsg.msg.time = parseInt(req.body.time);
-  }
-  if (req.body.energy != null) {
-    newMsg.msg.energy = parseFloat(req.body.energy);
-  }
-  if (req.body.gps != null) {
-    newMsg.msg.gps = req.body.gps;
-  }
-  if (req.body.odo != null) {
-    newMsg.msg.odo = parseFloat(req.body.odo);
-  }
-  if (req.body.speed != null) {
-    newMsg.msg.speed = parseInt(req.body.speed);
-  }
-  if (req.body.soc != null) {
-    newMsg.msg.soc = parseFloat(req.body.soc);
-  }
+router.patch("/message/:Id", getMessage, async (req, res) => {
   try {
+    const newMsg = {
+      _id: res.message._id,
+      msg: {
+        time: res.message.msg.time,
+        energy: res.message.msg.energy,
+        gps: res.message.msg.gps,
+        odo: res.message.msg.odo,
+        speed: res.message.msg.speed,
+        soc: res.message.msg.soc
+      }
+    };
+    if (req.body.id != null) {
+      newMsg._id = parseInt(req.body.id);
+    }
+    if (req.body.time != null) {
+      newMsg.msg.time = parseInt(req.body.time);
+    }
+    if (req.body.energy != null) {
+      newMsg.msg.energy = parseFloat(req.body.energy);
+    }
+    if (req.body.gps != null) {
+      newMsg.msg.gps = req.body.gps;
+    }
+    if (req.body.odo != null) {
+      newMsg.msg.odo = parseFloat(req.body.odo);
+    }
+    if (req.body.speed != null) {
+      newMsg.msg.speed = parseInt(req.body.speed);
+    }
+    if (req.body.soc != null) {
+      newMsg.msg.soc = parseFloat(req.body.soc);
+    }
+
     await VehicleData.updateOne(
       { _id: res.message._id },
       {
@@ -136,7 +136,7 @@ router.post("/message", async (req, res, next) => {
 });
 
 //Delete message by id
-router.delete("/id/:Id", async (req, res) => {
+router.delete("/message/:Id", async (req, res) => {
   try {
     const msgId = parseInt(req.params.Id);
     await VehicleData.deleteOne({ _id: msgId });

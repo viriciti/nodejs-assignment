@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start-nats": "sh ./start-nats",
-    "start-broadcast": "node vehicle-data-generator/index.js"
+    "start-broadcast": "node vehicle-data-generator/index.js",
+    "test": "mocha 'test/test.js'"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "csv-parse": "^3.2.0",
     "express": "^4.17.1",
     "http": "0.0.0",
+    "mocha": "^6.2.2",
     "mongodb": "^3.3.3",
     "mongoose": "^5.7.6",
     "nats": "^1.3.2",
